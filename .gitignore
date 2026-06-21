@@ -1,0 +1,17 @@
+# Recording / render output
+out/
+renders/
+*.webm
+
+# Generated audio (regenerate with scripts/tts.sh, scripts/music.sh)
+*.wav
+*.aac
+
+# Local TTS / Whisper venv
+.ttsvenv/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
