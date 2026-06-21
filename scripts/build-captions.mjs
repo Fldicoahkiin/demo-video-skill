@@ -96,8 +96,14 @@ function fixGroupText(s) {
 
 const out = {};
 for (const file of readdirSync(N).sort()) {
-  const m = file.match(/^(\d\d-[a-z]+)\.transcript\.json$/);
-  if (!m) continue;
+  // Scene names are NN- followed by lowercase letters, digits, and hyphens
+  // (e.g. 03-multi-upload). Warn rather than silently drop a stray transcript.
+  const m = file.match(/^(\d\d-[a-z0-9-]+)\.transcript\.json$/);
+  if (!m) {
+    if (file.endsWith(".transcript.json"))
+      console.warn(`  skipped ${file} — name a scene NN-lowercase-with-hyphens`);
+    continue;
+  }
   const scene = m[1];
   const words = mergeWords(JSON.parse(readFileSync(join(N, file), "utf8")));
   const groups = groupWords(words).map((g) => ({

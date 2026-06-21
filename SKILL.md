@@ -54,9 +54,11 @@ rendered straight to MP4, no recording) is an optional side path for doc pages.
    `bash scripts/tts.sh && bash scripts/transcribe.sh && node scripts/build-captions.mjs`.
    Edit `PHRASE_FIX` in `build-captions.mjs` for your brand names. Guide:
    [references/narration-and-captions.md](references/narration-and-captions.md).
-4. **Compose & render.** Assemble in one HyperFrames HTML timeline, then
-   `npx hyperframes render . --resolution landscape --fps 30 --crf 17`. Render
-   1:1 (1080p authored → 1080p out) — never upscale to 4K, it softens UI.
+4. **Compose & render.** Start from
+   [references/composition-skeleton.html](references/composition-skeleton.html)
+   (one clip + caption track + audio), grow the timeline, then
+   `npx hyperframes render . --resolution landscape --fps 30 --crf 17 --quality high`.
+   Render 1:1 (1080p authored → 1080p out) — never upscale to 4K, it softens UI.
    [references/composition.md](references/composition.md).
 5. **QC before you ship.** ffprobe the duration/audio, sample 1–2 frames (not
    black, not empty), captions inside the frame, narration not clipped, the key
@@ -66,7 +68,7 @@ rendered straight to MP4, no recording) is an optional side path for doc pages.
 
 ```bash
 # system deps
-brew install node ffmpeg uv          # uv only for the Python TTS/Whisper venv
+brew install node ffmpeg
 npx playwright install chromium
 
 # Python venv for local TTS + transcription (one time)
@@ -76,7 +78,7 @@ export PATH="$(pwd)/.ttsvenv/bin:$PATH"
 # 1) record  2) narrate  3) caption  4) compose+render
 node scripts/record.mjs
 bash scripts/tts.sh && bash scripts/transcribe.sh && node scripts/build-captions.mjs
-npx hyperframes render . --resolution landscape --fps 30 --crf 17 --output out/demo.mp4
+npx hyperframes render . --resolution landscape --fps 30 --crf 17 --quality high --output out/demo.mp4
 ```
 
 First TTS downloads ~340 MB (Kokoro), first transcribe ~466 MB (Whisper
@@ -106,5 +108,6 @@ Local TTS/Whisper need Python + `kokoro-onnx`. See
 - [references/recording.md](references/recording.md) — Director engine + worked example + recording pitfalls
 - [references/narration-and-captions.md](references/narration-and-captions.md) — VO writing, TTS, Whisper, caption fixes
 - [references/composition.md](references/composition.md) — HyperFrames timeline, crossfades, 1080p, rendering
+- [references/composition-skeleton.html](references/composition-skeleton.html) — minimal renderable composition to copy as index.html
 - [references/templates.md](references/templates.md) — hackathon + product-demo structures and VO skeletons
 - [references/troubleshooting.md](references/troubleshooting.md) — captions, white screen, audio, fonts

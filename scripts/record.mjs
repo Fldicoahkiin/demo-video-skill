@@ -16,9 +16,10 @@ const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const CLIPS = join(ROOT, "out", "clips");
 // Your running app. Record a deployed URL or a local dev server.
 const APP = process.env.DEMO_URL ?? "http://localhost:5173";
-// 1:1 device scale (deviceScaleFactor: 1 below) keeps UI text crisp — do NOT
-// record at 2× and downscale, it softens every frame. 1456×819 ≈ 16:9.
-const SIZE = { width: 1456, height: 819 };
+// Record at the composition's native resolution, 1:1 (deviceScaleFactor: 1
+// below). 1920×1080 matches the `landscape` render, so clips are embedded
+// without scaling — recording smaller, or at 2× DPR, softens every frame.
+const SIZE = { width: 1920, height: 1080 };
 
 // A visible synthetic cursor so the camera can follow the pointer. Injected into
 // every page; it grows/shrinks and tints on mousedown so clicks read on video.
@@ -183,6 +184,8 @@ for (const name of names) {
     storageState: state ?? undefined,
   });
   await context.addInitScript(CURSOR_INIT);
+  // If your app stores its theme in localStorage, set it before first paint to
+  // avoid a flash: context.addInitScript(() => localStorage.setItem("theme", "dark"));
   const page = await context.newPage();
   console.log(`▶ ${name}`);
   if (/^01[-_]/.test(name)) {

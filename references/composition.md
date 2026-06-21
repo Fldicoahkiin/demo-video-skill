@@ -18,6 +18,12 @@ A composition project has `index.html` (the timeline), `meta.json` (id/name),
 preview server alive while authoring: `npm run dev` (long-running — run it in the
 background, never foreground or it times out and dies).
 
+**Start from the skeleton.** Copy
+[composition-skeleton.html](composition-skeleton.html) to your project as
+`index.html` — a minimal, renderable composition (one title scene, one clip, a
+synced caption track, narration + music bed). Add one scene block and one
+`SCENE_AT` entry per recording, then grow the timeline.
+
 ## Timeline rules
 
 1. Every timed element needs `data-start`, `data-duration`, `data-track-index`.
@@ -51,7 +57,9 @@ structure to fill.
 Regenerates `assets/music/bed.wav`: a soft A-minor sine pad (root + fifth +
 octave + shimmer), lowpassed, slow tremolo, light echo, fade in/out, built with
 ffmpeg. Mixed into the composition at `data-volume="0.12"` so narration stays
-clear. Edit the frequencies/duration in the script for a different mood.
+clear. Edit the frequencies/duration in the script for a different mood. The bed
+is 240s; a shorter cut is fine — the composition's `data-duration` trims it. Only
+raise `duration=` for cuts longer than four minutes.
 
 ## Render
 
@@ -64,14 +72,15 @@ npx hyperframes render . --quality high --fps 30 --resolution landscape \
   1080p; rendering `landscape-4k` makes Chrome capture at 2× DPR and upscales
   1080p footage to 4K, softening every UI clip. 1:1 keeps screen recordings
   sharp. (Portrait/square exist for social cuts.)
-- Fast iteration: `--quality draft --output renders/draft.mp4`.
+- `--quality` defaults to `standard`; use `high` for the final render and
+  `draft` for fast iteration (`--quality draft --output renders/draft.mp4`).
 
-Always check before rendering:
+Always check before rendering (`npm run check` runs all three):
 
 ```bash
 npx hyperframes lint        # timing/structure errors
-npx hyperframes validate    # WCAG contrast + console errors
 npx hyperframes inspect     # layout overflow
+npx hyperframes validate    # console errors + WCAG contrast (hidden command; skip if unavailable)
 ```
 
 ## Swapping a clip after a UX change

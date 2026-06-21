@@ -34,7 +34,7 @@ Rules of thumb:
 
 | Speed | Words/sec | 100 words |
 |---|---|---|
-| normal (`+0%`) | ~2.5 en wps | ~40s |
+| normal (`1.0`) | ~2.5 en wps | ~40s |
 | calm (`0.95`) | ~2.3 en wps | ~43s |
 
 A 60–90s short demo is ~150–230 English words; a 4–5 min hackathon cut is

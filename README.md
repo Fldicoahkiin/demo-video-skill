@@ -33,7 +33,7 @@ narration, without redoing the other.
 ## Quick start
 
 ```bash
-brew install node ffmpeg uv
+brew install node ffmpeg
 npx playwright install chromium
 python3 -m venv .ttsvenv && .ttsvenv/bin/pip install kokoro-onnx soundfile
 export PATH="$(pwd)/.ttsvenv/bin:$PATH"
@@ -69,7 +69,7 @@ Install the HyperFrames skills: `npx skills add heygen-com/hyperframes`.
 demo-video-studio/
 ├── SKILL.md                 # the workflow
 ├── scripts/                 # record.mjs · tts.sh · transcribe.sh · build-captions.mjs · music.sh
-└── references/              # recording · narration-and-captions · composition · templates · pipeline · troubleshooting
+└── references/              # pipeline · recording · narration-and-captions · composition · templates · troubleshooting
 ```
 
 ## License
