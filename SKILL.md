@@ -1,5 +1,5 @@
 ---
-name: demo-video-studio
+name: demo-video-skill
 description: >
   Produce a cinematic product/demo video from a live web app. Playwright records
   real on-screen interactions with a visible synthetic cursor; local Kokoro TTS

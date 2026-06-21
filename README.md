@@ -1,6 +1,6 @@
-# demo-video-studio
+# demo-video-skill
 
-[![skills.sh](https://skills.sh/b/Fldicoahkiin/demo-video-studio)](https://skills.sh/Fldicoahkiin/demo-video-studio)
+[![skills.sh](https://skills.sh/b/Fldicoahkiin/demo-video-skill)](https://skills.sh/Fldicoahkiin/demo-video-skill)
 
 An agent skill that turns a running web app into a **cinematic demo video** —
 real recorded interaction + local AI narration + word-synced captions + a quiet
@@ -13,7 +13,7 @@ in as a template; the pipeline works for any product/launch/demo video.
 ## Install
 
 ```bash
-npx skills add Fldicoahkiin/demo-video-studio
+npx skills add Fldicoahkiin/demo-video-skill
 ```
 
 ## Pipeline
@@ -66,7 +66,7 @@ Install the HyperFrames skills: `npx skills add heygen-com/hyperframes`.
 ## Structure
 
 ```
-demo-video-studio/
+demo-video-skill/
 ├── SKILL.md                 # the workflow
 ├── scripts/                 # record.mjs · tts.sh · transcribe.sh · build-captions.mjs · music.sh
 └── references/              # pipeline · recording · narration-and-captions · composition · templates · troubleshooting
